@@ -4,3 +4,13 @@ select query_name ,
 
 from queries
 group by query_name;
+
+
+
+*해당 조건에 맞는 건 개수를 구할 때, 분자에 'sum'을 썼다. 맞는 것만 count하려고 하기 때문이다 (카운트 쓰는 것 아님 주의)
+with raw as(
+select round(sum(case when order_date=customer_pref_delivery_date then 1 else 0 end)/count(customer_id)*100,2) as immediate_percentage from Delivery
+where order_date in (select min(order_date) from Delivery group by customer_id)
+group by customer_id)
+
+select sum(immediate_percentage)/count(immediate_percentage) as immediate_percentage from raw
