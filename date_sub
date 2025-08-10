@@ -7,3 +7,9 @@ WHERE
   IN (
     SELECT player_id, MIN(event_date) AS first_login FROM Activity GROUP BY player_id
   )
+
+
+select activity_date as day, count(distinct user_id) as active_users
+from Activity
+where  activity_date>=DATE_SUB('2019-07-27', INTERVAL 30 DAY)
+group by day
