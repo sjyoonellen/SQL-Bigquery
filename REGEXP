@@ -1,5 +1,6 @@
 SELECT DISTINCT CITY FROM STATION WHERE CITY REGEXP '^[aeiouAEIOU]'
 
+------------------------------------------------------------------------------
 
 SELECT DISTINCT
     city
@@ -7,3 +8,11 @@ FROM
     STATION
 WHERE
     LOWER(city) REGEXP '^[aeiou].*[aeiou]$'
+
+------------------------------------------------------------------------------
+SELECT DISTINCT
+    CITY
+FROM 
+    STATION
+WHERE 
+    LOWER(LEFT(CITY, 1)) NOT REGEXP '^[aeiou]'
