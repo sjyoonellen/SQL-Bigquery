@@ -1,0 +1,4 @@
+
+'% DIAB1%'이란 ACNE DIAB100 처럼 두 번째가 DIAB1으로 시작한다는 뜻
+SELECT * FROM Patients
+WHERE conditions LIKE '% DIAB1%' OR conditions LIKE 'DIAB1%';
