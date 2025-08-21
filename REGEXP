@@ -16,3 +16,23 @@ FROM
     STATION
 WHERE 
     LOWER(LEFT(CITY, 1)) NOT REGEXP '^[aeiou]'
+
+-----------------------------------------------------------------------------------
+
+It contains exactly one @ symbol.
+It ends with .com.
+The part before the @ symbol contains only alphanumeric characters and underscores.
+The part after the @ symbol and before .com contains a domain name that contains only letters.
+
+select user_id, email
+from users
+where email regexp '^[a-z0-9_]+@[a-z]+\.com$'
+order by user_id;
+
+문자 그대로 . (점). 정규식에서 .는 아무 문자와 매치되므로 \\.으로 이스케이프
+
+
+
+
+
+
