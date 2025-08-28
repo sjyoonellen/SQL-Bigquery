@@ -1,3 +1,8 @@
+
+서브쿼리에 조합으로 추출하는 경우, 여러개가 뽑힐 때 그러는 것 같고, 한 개만 뽑힐 때는 (,) 이렇게 조합으로 안 하는 듯 (확인 필요)
+
+
+
 물고기 종류 별로 가장 큰 물고기의 ID, 물고기 이름, 길이를 출력하는 SQL 문을 작성해주세요.
 
 subquery안 에 fish_type과 length 조합을 넣어야 함 (주의) 
@@ -9,3 +14,16 @@ WHERE (A.FISH_TYPE,A.LENGTH) IN (SELECT FISH_TYPE, MAX(LENGTH) FROM FISH_INFO
               GROUP BY FISH_TYPE        
                         )
 ORDER BY ID
+
+--------------------------------------------------------------------------------------------------------------
+HR_DEPARTMENT, HR_EMPLOYEES, HR_GRADE 테이블에서 2022년도 한해 평가 점수가 가장 높은 사원 정보를 조회하려 합니다. 
+2022년도 평가 점수가 가장 높은 사원들의 점수, 사번, 성명, 직책, 이메일을 조회하는 SQL문을 작성해주세요.
+
+WITH A AS(
+SELECT EMP_NO, SUM(SCORE) AS SUM_SCORE FROM HR_GRADE
+    WHERE YEAR='2022'
+GROUP BY EMP_NO)
+
+
+SELECT A.SUM_SCORE AS SCORE, A.EMP_NO, B.EMP_NAME, B.POSITION,B.EMAIL FROM A JOIN HR_EMPLOYEES B ON A.EMP_NO=B.EMP_NO
+WHERE A.SUM_SCORE=(SELECT MAX(SUM_SCORE) FROM A)
